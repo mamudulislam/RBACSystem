@@ -1,0 +1,155 @@
+.container {
+  max-width: 800px;
+}
+
+.header {
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 14px;
+}
+
+.profileCard {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.userInfo {
+  flex: 1;
+}
+
+.userInfo h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.userInfo p {
+  color: #888;
+  font-size: 14px;
+  margin: 4px 0 12px 0;
+}
+
+.roleTag {
+  background: #f0f0f0;
+  color: #444;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.logoutBtn {
+  background: #fff1f0;
+  color: #f5222d;
+  border: 1px solid #ffa39e;
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  font-size: 13px;
+  font-weight: 800;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  padding-left: 8px;
+}
+
+.itemList {
+  background: white;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #f8f8f8;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+.item:hover {
+  background: #fafafa;
+}
+
+.itemIcon {
+  width: 44px;
+  height: 44px;
+  background: #f4f4f5;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.itemInfo {
+  flex: 1;
+}
+
+.itemInfo h5 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.itemInfo p {
+  font-size: 13px;
+  color: #888;
+  margin: 4px 0 0 0;
+}
+
+.chevron {
+  color: #ccc;
+}

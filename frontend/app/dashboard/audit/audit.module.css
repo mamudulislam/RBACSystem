@@ -1,0 +1,67 @@
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #888888;
+  font-size: 14px;
+}
+
+.tableCard {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  padding: 16px 24px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #999;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+  background: #FAFAFA;
+}
+
+.table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.actionBadge {
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.payload pre {
+  max-width: 400px;
+  max-height: 120px;
+  overflow: auto;
+  font-size: 11px;
+  background: #f8f8f8;
+  padding: 12px;
+  border-radius: 12px;
+  margin: 0;
+  color: #666;
+}
