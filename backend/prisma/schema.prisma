@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String           @id @default(uuid())
+  email           String           @unique
+  password        String
+  fullName        String
+  role            String
+  isActive        Boolean          @default(true)
+  isSuspended     Boolean          @default(false)
+  isBanned        Boolean          @default(false)
+  permissions     UserPermission[]
+  refreshTokens   RefreshToken[]
+  tasks           Task[]
+  auditLogs       AuditLog[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model Permission {
+  id          String           @id @default(uuid())
+  atom        String           @unique
+  description String?
+  roles       RolePermission[]
+  users       UserPermission[]
+}
+
+model RolePermission {
+  role         String
+  permissionId String
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  @@id([role, permissionId])
+}
+
+model UserPermission {
+  userId       String
+  permissionId String
+  granted      Boolean    @default(true)
+  user         User       @relation(fields: [userId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  @@id([userId, permissionId])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  status      String   @default("TODO") // TODO, IN_PROGRESS, DONE
+  priority    String   @default("MEDIUM") // LOW, MEDIUM, HIGH
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  action    String
+  resource  String
+  payload   String?
+  timestamp DateTime @default(now())
+}

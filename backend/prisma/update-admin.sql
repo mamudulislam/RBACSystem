@@ -1,0 +1,1 @@
+UPDATE "User" SET "isActive" = true, "isSuspended" = false, "isBanned" = false WHERE email = 'admin@obliq.com';

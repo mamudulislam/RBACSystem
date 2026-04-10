@@ -1,0 +1,1 @@
+SELECT id, email, "isActive", "isSuspended", "isBanned", role FROM "User" WHERE email = 'admin@obliq.com';
