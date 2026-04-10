@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './audit.module.css';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
 export default function AuditLogPage() {
   const [logs, setLogs] = useState<any[]>([]);
 
@@ -13,7 +15,7 @@ export default function AuditLogPage() {
 
   const fetchLogs = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/audit', { withCredentials: true });
+      const res = await axios.get(`${API_URL}/audit`, { withCredentials: true });
       setLogs(res.data);
     } catch (err) {
       console.error("Failed to fetch logs", err);

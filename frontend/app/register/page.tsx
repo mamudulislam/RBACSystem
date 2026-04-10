@@ -10,6 +10,8 @@ import loginBackground from '@/public/loginbackground.png';
 import loginIcons from '@/public/loginicons.png';
 import Link from 'next/link';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -24,7 +26,7 @@ export default function RegisterPage() {
     setLoading(true);
     setError('');
     try {
-      await axios.post('http://localhost:3001/auth/register', { 
+      await axios.post(`${API_URL}/auth/register`, { 
         email, 
         password, 
         fullName 

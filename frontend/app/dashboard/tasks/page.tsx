@@ -5,6 +5,8 @@ import { Plus, GripVertical, MoreHorizontal, Clock, AlertCircle, CheckCircle2, X
 import axios from 'axios';
 import styles from './tasks.module.css';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
 export default function TasksPage() {
   const [columns, setColumns] = useState([
     { id: 'TODO', title: 'To Do', tasks: [] },
@@ -21,7 +23,7 @@ export default function TasksPage() {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/tasks', { withCredentials: true });
+      const res = await axios.get(`${API_URL}/tasks`, { withCredentials: true });
       const tasks = res.data;
       
       setColumns([
@@ -39,7 +41,7 @@ export default function TasksPage() {
   const handleCreateTask = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3001/tasks', newTask, { withCredentials: true });
+      await axios.post(`${API_URL}/tasks`, newTask, { withCredentials: true });
       setShowModal(false);
       setNewTask({ title: '', description: '', priority: 'MEDIUM' });
       fetchTasks();
@@ -50,7 +52,7 @@ export default function TasksPage() {
 
   const handleStatusChange = async (taskId: string, newStatus: string) => {
     try {
-      await axios.put(`http://localhost:3001/tasks/${taskId}`, { status: newStatus }, { withCredentials: true });
+      await axios.put(`${API_URL}/tasks/${taskId}`, { status: newStatus }, { withCredentials: true });
       fetchTasks();
     } catch (err) {
       console.error("Failed to update task", err);
@@ -59,7 +61,7 @@ export default function TasksPage() {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      await axios.delete(`http://localhost:3001/tasks/${taskId}`, { withCredentials: true });
+      await axios.delete(`${API_URL}/tasks/${taskId}`, { withCredentials: true });
       fetchTasks();
     } catch (err) {
       console.error("Failed to delete task", err);

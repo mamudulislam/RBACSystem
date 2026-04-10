@@ -7,6 +7,8 @@ import PermissionEditor from './PermissionEditor';
 import styles from './users.module.css';
 import { useAuth } from '@/context/AuthContext';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
 export default function UsersPage() {
   const { user: currentUser } = useAuth();
   const [users, setUsers] = useState<any[]>([]);
@@ -29,7 +31,7 @@ export default function UsersPage() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/users', { withCredentials: true });
+      const res = await axios.get(`${API_URL}/users`, { withCredentials: true });
       setUsers(res.data);
     } catch (err) {
       console.error("Failed to fetch users", err);
@@ -38,7 +40,7 @@ export default function UsersPage() {
 
   const fetchPermissions = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/users/permissions', { withCredentials: true });
+      const res = await axios.get(`${API_URL}/users/permissions`, { withCredentials: true });
       setAllPermissions(res.data);
     } catch (err) {
       console.error("Failed to fetch permissions", err);
@@ -47,7 +49,7 @@ export default function UsersPage() {
 
   const handleSavePermissions = async (atoms: string[]) => {
     try {
-      await axios.post(`http://localhost:3001/users/${editingUser.id}/permissions`, { atoms }, { withCredentials: true });
+      await axios.post(`${API_URL}/users/${editingUser.id}/permissions`, { atoms }, { withCredentials: true });
       setMessage('Permissions updated successfully!');
       setEditingUser(null);
       fetchUsers();
@@ -59,7 +61,7 @@ export default function UsersPage() {
 
   const handleToggleStatus = async (userId: string, field: string) => {
     try {
-      await axios.post(`http://localhost:3001/users/${userId}/status`, { field }, { withCredentials: true });
+      await axios.post(`${API_URL}/users/${userId}/status`, { field }, { withCredentials: true });
       setMessage(`User status updated successfully!`);
       fetchUsers();
       setTimeout(() => setMessage(''), 3000);
@@ -72,7 +74,7 @@ export default function UsersPage() {
     e.preventDefault();
     setIsCreating(true);
     try {
-      await axios.post('http://localhost:3001/users', newUser, { withCredentials: true });
+      await axios.post(`${API_URL}/users`, newUser, { withCredentials: true });
       setMessage('User created successfully!');
       setShowCreateModal(false);
       setNewUser({ email: '', password: '', fullName: '', role: 'AGENT' });

@@ -31,10 +31,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+
   // Function to refresh token
   const refreshToken = useCallback(async () => {
     try {
-      const res = await axios.post('http://localhost:3001/auth/refresh');
+      const res = await axios.post(`${API_URL}/auth/refresh`);
       const { access_token, user: userData } = res.data;
       setAccessToken(access_token);
       setUser(userData);
@@ -77,7 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
-        if (error?.response?.status === 401 && !prevRequest?.sent && prevRequest.url !== 'http://localhost:3001/auth/refresh') {
+        if (error?.response?.status === 401 && !prevRequest?.sent && prevRequest.url !== `${API_URL}/auth/refresh`) {
           prevRequest.sent = true;
           const newAccessToken = await refreshToken();
           if (newAccessToken) {
@@ -97,7 +99,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, pass: string) => {
     try {
-      const res = await axios.post('http://localhost:3001/auth/login', { email, password: pass });
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password: pass });
       const { access_token, user: userData } = res.data;
       setAccessToken(access_token);
       setUser(userData);
@@ -115,7 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = async () => {
     try {
-      await axios.post('http://localhost:3001/auth/logout');
+      await axios.post(`${API_URL}/auth/logout`);
     } catch (err) {
       console.error("Logout error", err);
     }
