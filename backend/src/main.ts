@@ -6,6 +6,8 @@ import rateLimit from 'express-rate-limit';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
+
   app.enableCors({
     origin: ['http://localhost:3000', 'https://rbac-system-one.vercel.app'],
     credentials: true,
